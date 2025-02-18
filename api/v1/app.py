@@ -1,24 +1,10 @@
 #!/usr/bin/python3
 """
-Flask Web API for the AirBnB Clone project.
+Flask web application for AirBnB API.
 
-This script initializes and runs a Flask web application that serves 
-as the API backend for the AirBnB Clone project.
-
-Key functionalities:
-- Creates a Flask app instance.
-- Registers the `app_views` Blueprint, which contains API routes.
-- Closes the database storage session after each request.
-- Configures the server to run on a specified host and port.
-
-Environment Variables:
-- HBNB_API_HOST: Defines the host IP (default: "0.0.0.0").
-- HBNB_API_PORT: Defines the port number (default: 5000).
-
-Dependencies:
-- Flask
-- models.storage (for database interaction)
-- api.v1.views (contains API routes)
+This module initializes the Flask application, registers the API Blueprint,
+and defines the teardown method to close the database/storage session.
+It also configures the application to run on a specified host and port.
 """
 
 from flask import Flask, jsonify
