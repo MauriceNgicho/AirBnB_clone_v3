@@ -24,7 +24,7 @@ def close_storage(exception):
     storage.close()
 
 if __name__ == "__main__":
-    # Set host and port from environment variables or use default values
+    """Set host and port from environment variables or use default values"""
     host = os.getenv("HBNB_API_HOST", "0.0.0.0")
     port = int(os.getenv("HBNB_API_PORT", 5000))
 
