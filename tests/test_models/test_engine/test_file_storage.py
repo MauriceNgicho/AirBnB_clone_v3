@@ -67,6 +67,36 @@ test_file_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
+    def setUp(self):
+        """Set up test environment"""
+        self.storage = FileStorage()
+        self.storage.reload()
+
+    def test_get(self):
+        """Test get() method for valid and invalid cases"""
+        new_state = State(name="TestStateFile")
+        self.storage.new(new_state)
+        self.storage.save()
+
+        retrieved_state = self.storage.get(State, new_state.id)
+        self.assertEqual(retrieved_state, new_state)
+        self.assertIsInstance(retrieved_state, State)
+
+        # Test with non-existent ID
+        self.assertIsNone(self.storage.get(State, "non-existent-id"))
+
+    def test_count(self):
+        """Test count() method for counting objects"""
+        initial_count = self.storage.count()
+        state_count = self.storage.count(State)
+
+        new_state = State(name="AnotherTestStateFile")
+        self.storage.new(new_state)
+        self.storage.save()
+
+        self.assertEqual(self.storage.count(), initial_count + 1)
+        self.assertEqual(self.storage.count(State), state_count + 1)
+
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
